@@ -2,15 +2,22 @@
 <html>
     <head>
         <title>CSS Border Preview Tool</title>
-        <link href="https://fonts.googleapis.com/css?family=Chelsea+Market|Montserrat|Cute+Font|Megrim|Monoton|Righteous|Stardos+Stencil|Frijole|UnifrakturMaguntia|Vast+Shadow&display=swap" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Chelsea+Market|Montserrat|Cute+Font|Megrim|Monoton|Righteous|UnifrakturMaguntia&display=swap" rel="stylesheet">
         <style>
             body {
                 background-color: var(--bg-color, white);
                 color: var(--bg-text, black);
                 margin: 0;
+                padding: 10px;
             }
 
-            h1 {
+            #h1 {
                 font-family: 'Chelsea Market', Arial, sans-serif;
                 font-size: 40px;
                 text-align: center;
@@ -28,17 +35,29 @@
                 min-height: 6vh;
             }
 
-            article {
+            #demo-note {
                 background-color: none;
                 height: 94vh;
                 padding: 1em;
             }
 
-            .bg-txt-h3s {
+            #demo-note > textarea {
+                width: 95.2vw;
+                max-width: 95.2vw;
+                height: 80vh;
+                font-family: 'Montserrat', Helvetica, sans-serif;
+                font-size: 18px;
+                color: var(--bg-text);
+                background-color: var(--bg-color);
+                border: 1px solid var(--bg-color);
+                scrollbar-width: thin;
+            }
+
+            /*.bg-txt-h3s {
                 display: none;
                 font-family: 'Righteous', Helvetica, sans-serif;
                 text-align: center;
-            }
+            }*/
 
             /*#bg-color-h3 {
                 display: none;
@@ -60,29 +79,71 @@
                 width: 7vw;
             }
 
-            #bg-color-h3 { display: none; }
+            #bg-color-h3 { 
+                display: none;
+                font-family: 'Chelsea Market', Helvetica, sans-serif;
+                text-align: center;
+                font-size: 2em;
+                margin-top: 1.5em;
+            }
 
-            #txt-color-h3 { display: none; }
+            #txt-color-h3 { 
+                display: none;
+                font-family: 'Chelsea Market', Helvetica, sans-serif;
+                text-align: center;
+                font-size: 2em;
+                margin-top: 1.5em;
+            }
 
-            /*#black-bg { display: none; }
+            #black-bg { 
+                background-color: black;
+                color: black;
+            }
 
-            #white-bg { display: none; }
+            #white-bg {
+                background-color: white;
+                color: white;
+            }
 
-            #red-bg { display: none; }
+            #red-bg { 
+                background-color: #e74c3c;
+                color: #e74c3c;
+            }
 
-            #orange-bg { display: none; }
+            #orange-bg {
+                background-color: #eb984e;
+                color: #eb984e;
+            }
 
-            #yellow-bg { display: none; }
+            #yellow-bg {
+                background-color: #f7dc6f;
+                color: #f7dc6f;
+            }
 
-            #green-bg { display: none; }
+            #green-bg {
+                background-color: #52be80;
+                color: #52be80;
+            }
 
-            #blue-bg { display: none; }
+            #blue-bg {
+                background-color: #5dade2;
+                color: #5dade2;
+            }
 
-            #purple-bg { display: none; }
+            #purple-bg {
+                background-color: #d7bde2;
+                color: #d7bde2;
+            }
 
-            #pink-bg { display: none; }
+            #pink-bg {
+                background-color: #fadbd8;
+                color: #fadbd8;
+            }
 
-            #gray-bg { display: none; }*/
+            #gray-bg {
+                background-color: #d5dbdb;
+                color: #d5dbdb;
+            }
 
             .bg-text-colors {
                 display: none;
@@ -90,67 +151,124 @@
                 width: 7vw;
             }
 
-            /*#black-txt { display: none; }
+            .btn {
+                width: 8em;
+                color: black;
+                font-family: 'Montserrat', Helvetica, sans-serif;
+            }
+            
+            .btn-block {
+                width: 95.2vw;
+            }
 
-            #white-txt { display: none; }
+            #black-txt { 
+                background-color: black;
+                color: black;
+            }
 
-            #red-txt { display: none; }
+            #white-txt {
+                background-color: white;
+                color: white;
+            }
 
-            #orange-txt { display: none; }
+            #red-txt { 
+                background-color: #b03a2e;
+                color: #b03a2e;
+            }
 
-            #yellow-txt { display: none; }
+            #orange-txt {
+                background-color: #e67e22;
+                color: #e67e22;
+            }
 
-            #green-txt { display: none; }
+            #yellow-txt {
+                background-color: #f1c40f;
+                color: #f1c40f;
+            }
 
-            #blue-txt { display: none; }
+            #green-txt {
+                background-color: #196f3d;
+                color: #196f3d;
+            }
 
-            #purple-txt { display: none; }
+            #blue-txt {
+                background-color: #154360;
+                color: #154360;
+            }
 
-            #pink-txt { display: none; }
+            #purple-txt {
+                background-color: #4a235a;
+                color: #4a235a;
+            }
 
-            #gray-txt { display: none; }*/
+            #pink-txt {
+                background-color: #cd005d;
+                color: #cd005d;
+            }
+
+            #gray-txt {
+                background-color: #4d4d4d;
+                color: #4d4d4d;
+            }
+
+            #dark {
+                margin-left: 27em;
+            }
+
+            #notes {
+                margin-top: -4.2em;
+                margin-left: 85vw;
+            }
         </style>
     </head>
     <body>
         <div class="flex-container">
+        <h1 id="h1">Jotter.io<!--CSS Note-taking Tool w/ Themes--></h1>
         <div class="theme-div">
-        <button value="dark" id="dark">dark</button>
-        <button value="murky" id="murky">murky</button>
-        <button value="light" id="light">light</button>
-        <button value="custom" id="custom" onclick="customThemeLoad()">custom</button>
-        <button value="back" id="back" onclick="goBack()">back</button>
-        
-        <h3 id="bg-color-h3">Background color:</h3>
-        <button value="black-bg" id="black-bg" class="bg-colors">black</button>
-        <button value="white-bg" id="white-bg" class="bg-colors">white</button>
-        <button value="red-bg" id="red-bg" class="bg-colors">red</button>
-        <button value="orange-bg" id="orange-bg" class="bg-colors">orange</button>
-        <button value="yellow-bg" id="yellow-bg" class="bg-colors">yellow</button>
-        <button value="green-bg" id="green-bg" class="bg-colors">green</button>
-        <button value="blue-bg" id="blue-bg" class="bg-colors">blue</button>
-        <button value="purple-bg" id="purple-bg" class="bg-colors">purple</button>
-        <button value="pink-bg" id="pink-bg" class="bg-colors">pink</button>
-        <button value="gray-bg" id="gray-bg" class="bg-colors">gray</button>
+        <button value="dark" id="dark" class="btn btn-light btn-md">dark</button>
+        <button value="murky" id="murky" class="btn btn-light btn-md">murky</button>
+        <button value="light" id="light" class="btn btn-light btn-md">light</button>
+        <button value="custom" id="custom" onclick="customThemeLoad()" class="btn btn-light btn-md">custom</button>
+        <div class="dropdown">
+            <button class="btn btn-light btn-md dropdown-toggle"id="notes" data-toggle="dropdown">Notes
+            <span class="caret"></span></button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#" id="no-notes">No notes here!</a>
+            </div>
+        </div>
+        <button value="back" id="back" onclick="goBack()" class="btn btn-light btn-md">back</button>
+         
+        <h3 id="bg-color-h3" class="bg-text-h3s">Background color:</h3>
+        <button value="black-bg" id="black-bg" class="bg-colors btn">black</button>
+        <button value="white-bg" id="white-bg" class="bg-colors btn btn-light">white</button>
+        <button value="red-bg" id="red-bg" class="bg-colors btn btn-light">red</button>
+        <button value="orange-bg" id="orange-bg" class="bg-colors btn btn-light">orange</button>
+        <button value="yellow-bg" id="yellow-bg" class="bg-colors btn btn-light">yellow</button>
+        <button value="green-bg" id="green-bg" class="bg-colors btn btn-light">green</button>
+        <button value="blue-bg" id="blue-bg" class="bg-colors btn btn-light">blue</button>
+        <button value="purple-bg" id="purple-bg" class="bg-colors btn btn-light">purple</button>
+        <button value="pink-bg" id="pink-bg" class="bg-colors btn btn-light">pink</button>
+        <button value="gray-bg" id="gray-bg" class="bg-colors btn btn-light">gray</button>
         
         <br>
 
-        <h3 id="txt-color-h3">Text color:</h3>
-        <button value="black-txt" id="black-txt" class="bg-text-colors">black</button>
-        <button value="white-txt" id="white-txt" class="bg-text-colors">white</button>
-        <button value="red-txt" id="red-txt" class="bg-text-colors">red</button>
-        <button value="orange-txt" id="orange-txt" class="bg-text-colors">orange</button>
-        <button value="yellow-txt" id="yellow-txt" class="bg-text-colors">yellow</button>
-        <button value="green-txt" id="green-txt" class="bg-text-colors">green</button>
-        <button value="blue-txt" id="blue-txt" class="bg-text-colors">blue</button>
-        <button value="purple-txt" id="purple-txt" class="bg-text-colors">purple</button>
-        <button value="pink-txt" id="pink-txt" class="bg-text-colors">pink</button>
-        <button value="gray-txt" id="gray-txt" class="bg-text-colors">gray</button>
+        <h3 id="txt-color-h3" class="bg-text-h3s">Text color:</h3>
+        <button value="black-txt" id="black-txt" class="bg-text-colors btn btn-light">black</button>
+        <button value="white-txt" id="white-txt" class="bg-text-colors btn btn-light">white</button>
+        <button value="red-txt" id="red-txt" class="bg-text-colors btn btn-light">red</button>
+        <button value="orange-txt" id="orange-txt" class="bg-text-colors btn btn-light">orange</button>
+        <button value="yellow-txt" id="yellow-txt" class="bg-text-colors btn btn-light">yellow</button>
+        <button value="green-txt" id="green-txt" class="bg-text-colors btn btn-light">green</button>
+        <button value="blue-txt" id="blue-txt" class="bg-text-colors btn btn-light">blue</button>
+        <button value="purple-txt" id="purple-txt" class="bg-text-colors btn btn-light">purple</button>
+        <button value="pink-txt" id="pink-txt" class="bg-text-colors btn btn-light">pink</button>
+        <button value="gray-txt" id="gray-txt" class="bg-text-colors btn btn-light">gray</button>
         </div>
 
-        <article>
-            <h1>CSS Note-taking Tool w/ Themes</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </article>
+        <section id="demo-note">
+            <textarea>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+            <button type="button" class="btn btn-light btn-block" onclick="saveNote()">Save Note</button>
+        </section>
     </div>
         <!--<div id="border-box"></div>-->
         <script>
@@ -160,7 +278,8 @@
             
             var backButton = document.getElementById("back");
 
-            //var demoNote = document.getElementById("demo-note");
+            var demoNote = document.getElementById("demo-note");
+            var h1 = document.getElementById("h1");
             
             var blackBg = document.getElementById("black-bg");
             var whiteBg = document.getElementById("white-bg");
@@ -194,14 +313,17 @@
                 document.getElementById("murky").style.display = "none";
                 document.getElementById("light").style.display = "none";
                 document.getElementById("custom").style.display = "none";
+                document.getElementById("notes").style.display = "none";
                 //root.style.setProperty('--bg-color', bgColor);
                 //root.style.setProperty('--bg-text', bgText);
                 backButton.style.display = "block";
+                backButton.style.marginTop = "-3em";
 
                 bgH3.style.display = "block";
                 txtH3.style.display = "block";
 
-                //demoNote.style.display="none";
+                demoNote.style.display = "none";
+                h1.style.display = "inline";
 
                 blackBg.style.display = "inline";
                 whiteBg.style.display = "inline";
@@ -226,34 +348,20 @@
                 grayTxt.style.display = "inline";
             }
 
-            themes.forEach((btn) => {
-                btn.addEventListener('click', themeChange);
-            })
-
-            function themeChange(event) {
-                switch(event.target.value) {
-                    case 'dark': 
-                    root.style.setProperty('--bg-color', 'black');
-                    root.style.setProperty('--bg-text', 'white');
-                        break
-                    case 'murky':
-                        root.style.setProperty('--bg-color', 'rgb(60, 86, 134)');
-                        root.style.setProperty('--bg-text', 'white');
-                        break
-                    case 'light':
-                        root.style.setProperty('--bg-color', 'white');
-                        root.style.setProperty('--bg-text', 'black');
-                    break
-                    case 'back':
-                    document.getElementById("dark").style.display = "inline";
+            function goBack() {
+                document.getElementById("dark").style.display = "inline";
                     document.getElementById("murky").style.display = "inline";
                     document.getElementById("light").style.display = "inline";
                     document.getElementById("custom").style.display = "inline";
+                    document.getElementById("notes").style.display = "inline";
                     
                     backButton.style.display = "none";
 
                     bgH3.style.display = "none";
                     txtH3.style.display = "none";
+
+                    demoNote.style.display = "block";
+                    h1.style.display = "block";
 
                     blackBg.style.display = "none";
                     whiteBg.style.display = "none";
@@ -276,7 +384,26 @@
                     purpleTxt.style.display = "none";
                     pinkTxt.style.display = "none";
                     grayTxt.style.display = "none";
+            }
+
+            themes.forEach((btn) => {
+                btn.addEventListener('click', themeChange);
+            })
+
+            function themeChange(event) {
+                switch(event.target.value) {
+                    case 'dark': 
+                    root.style.setProperty('--bg-color', 'black');
+                    root.style.setProperty('--bg-text', 'white');
                         break
+                    case 'murky':
+                        root.style.setProperty('--bg-color', 'rgb(60, 86, 134)');
+                        root.style.setProperty('--bg-text', 'white');
+                        break
+                    case 'light':
+                        root.style.setProperty('--bg-color', 'white');
+                        root.style.setProperty('--bg-text', 'black');
+                    break
                     case 'black-bg':
                         root.style.setProperty('--bg-color', 'black');
                         break
@@ -337,6 +464,10 @@
                     case 'gray-txt':
                         root.style.setProperty('--bg-text', '#4d4d4d');
                 }
+            }
+
+            function saveNote() {
+
             }
 
         </script>
