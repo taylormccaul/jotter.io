@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CSS Border Preview Tool</title>
+        <link href="https://fonts.googleapis.com/css?family=Chelsea+Market|Montserrat|Cute+Font|Megrim|Monoton|Righteous|Stardos+Stencil|Frijole|UnifrakturMaguntia|Vast+Shadow&display=swap" rel="stylesheet">
+        <style>
+            body {
+                background-color: var(--bg-color, white);
+                color: var(--bg-text, black);
+                margin: 0;
+            }
+
+            h1 {
+                font-family: 'Chelsea Market', Arial, sans-serif;
+                font-size: 40px;
+                text-align: center;
+            }
+
+            .flex-container {
+                display: flex;
+                flex-flow: column nowrap;
+                -ms-flex-flow: column nowrap;
+                justify-content: center;
+            }
+
+            .theme-div {
+                background-color: none;
+                min-height: 6vh;
+            }
+
+            article {
+                background-color: none;
+                height: 94vh;
+                padding: 1em;
+            }
+
+            .bg-txt-h3s {
+                display: none;
+                font-family: 'Righteous', Helvetica, sans-serif;
+                text-align: center;
+            }
+
+            /*#bg-color-h3 {
+                display: none;
+                font-family: 'Righteous', Helvetica, sans-serif;
+                text-align: center;
+            }
+
+            #txt-color-h3 {
+                display: none;
+                font-family: 'Righteous', Helvetica, sans-serif;
+                text-align: center;
+            }*/
+
+            #back { display: none; }
+
+            .bg-colors { 
+                display: none;
+                padding: 10px 15px;
+                width: 7vw;
+            }
+
+            #bg-color-h3 { display: none; }
+
+            #txt-color-h3 { display: none; }
+
+            /*#black-bg { display: none; }
+
+            #white-bg { display: none; }
+
+            #red-bg { display: none; }
+
+            #orange-bg { display: none; }
+
+            #yellow-bg { display: none; }
+
+            #green-bg { display: none; }
+
+            #blue-bg { display: none; }
+
+            #purple-bg { display: none; }
+
+            #pink-bg { display: none; }
+
+            #gray-bg { display: none; }*/
+
+            .bg-text-colors {
+                display: none;
+                padding: 10px 15px;
+                width: 7vw;
+            }
+
+            /*#black-txt { display: none; }
+
+            #white-txt { display: none; }
+
+            #red-txt { display: none; }
+
+            #orange-txt { display: none; }
+
+            #yellow-txt { display: none; }
+
+            #green-txt { display: none; }
+
+            #blue-txt { display: none; }
+
+            #purple-txt { display: none; }
+
+            #pink-txt { display: none; }
+
+            #gray-txt { display: none; }*/
+        </style>
+    </head>
+    <body>
+        <div class="flex-container">
+        <div class="theme-div">
+        <button value="dark" id="dark">dark</button>
+        <button value="murky" id="murky">murky</button>
+        <button value="light" id="light">light</button>
+        <button value="custom" id="custom" onclick="customThemeLoad()">custom</button>
+        <button value="back" id="back" onclick="goBack()">back</button>
+        
+        <h3 id="bg-color-h3">Background color:</h3>
+        <button value="black-bg" id="black-bg" class="bg-colors">black</button>
+        <button value="white-bg" id="white-bg" class="bg-colors">white</button>
+        <button value="red-bg" id="red-bg" class="bg-colors">red</button>
+        <button value="orange-bg" id="orange-bg" class="bg-colors">orange</button>
+        <button value="yellow-bg" id="yellow-bg" class="bg-colors">yellow</button>
+        <button value="green-bg" id="green-bg" class="bg-colors">green</button>
+        <button value="blue-bg" id="blue-bg" class="bg-colors">blue</button>
+        <button value="purple-bg" id="purple-bg" class="bg-colors">purple</button>
+        <button value="pink-bg" id="pink-bg" class="bg-colors">pink</button>
+        <button value="gray-bg" id="gray-bg" class="bg-colors">gray</button>
+        
+        <br>
+
+        <h3 id="txt-color-h3">Text color:</h3>
+        <button value="black-txt" id="black-txt" class="bg-text-colors">black</button>
+        <button value="white-txt" id="white-txt" class="bg-text-colors">white</button>
+        <button value="red-txt" id="red-txt" class="bg-text-colors">red</button>
+        <button value="orange-txt" id="orange-txt" class="bg-text-colors">orange</button>
+        <button value="yellow-txt" id="yellow-txt" class="bg-text-colors">yellow</button>
+        <button value="green-txt" id="green-txt" class="bg-text-colors">green</button>
+        <button value="blue-txt" id="blue-txt" class="bg-text-colors">blue</button>
+        <button value="purple-txt" id="purple-txt" class="bg-text-colors">purple</button>
+        <button value="pink-txt" id="pink-txt" class="bg-text-colors">pink</button>
+        <button value="gray-txt" id="gray-txt" class="bg-text-colors">gray</button>
+        </div>
+
+        <article>
+            <h1>CSS Note-taking Tool w/ Themes</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </article>
+    </div>
+        <!--<div id="border-box"></div>-->
+        <script>
+            //ability to add themes, save themes, create custom themes, add notes, save notes, etc.
+            const root = document.documentElement;
+            const themes = document.querySelectorAll('.theme-div > button');
+            
+            var backButton = document.getElementById("back");
+
+            //var demoNote = document.getElementById("demo-note");
+            
+            var blackBg = document.getElementById("black-bg");
+            var whiteBg = document.getElementById("white-bg");
+            var redBg = document.getElementById("red-bg");
+            var orangeBg = document.getElementById("orange-bg");
+            var yellowBg = document.getElementById("yellow-bg");
+            var greenBg = document.getElementById("green-bg");
+            var blueBg = document.getElementById("blue-bg");
+            var purpleBg = document.getElementById("purple-bg");
+            var pinkBg = document.getElementById("pink-bg");
+            var grayBg = document.getElementById("gray-bg");
+            var bgH3 = document.getElementById("bg-color-h3");
+            var txtH3 = document.getElementById("txt-color-h3");
+
+            var blackTxt = document.getElementById("black-txt");
+            var whiteTxt = document.getElementById("white-txt");
+            var redTxt = document.getElementById("red-txt");
+            var orangeTxt = document.getElementById("orange-txt");
+            var yellowTxt = document.getElementById("yellow-txt");
+            var greenTxt = document.getElementById("green-txt");
+            var blueTxt = document.getElementById("blue-txt");
+            var purpleTxt = document.getElementById("purple-txt");
+            var pinkTxt = document.getElementById("pink-txt");
+            var grayTxt = document.getElementById("gray-txt");
+
+            //var bgColor = prompt("Choose a background color.");
+            //var bgText = prompt("Choose a text color.");
+
+            function customThemeLoad() {
+                document.getElementById("dark").style.display = "none";
+                document.getElementById("murky").style.display = "none";
+                document.getElementById("light").style.display = "none";
+                document.getElementById("custom").style.display = "none";
+                //root.style.setProperty('--bg-color', bgColor);
+                //root.style.setProperty('--bg-text', bgText);
+                backButton.style.display = "block";
+
+                bgH3.style.display = "block";
+                txtH3.style.display = "block";
+
+                //demoNote.style.display="none";
+
+                blackBg.style.display = "inline";
+                whiteBg.style.display = "inline";
+                redBg.style.display = "inline";
+                orangeBg.style.display = "inline";
+                yellowBg.style.display = "inline";
+                greenBg.style.display = "inline";
+                blueBg.style.display = "inline";
+                purpleBg.style.display = "inline";
+                pinkBg.style.display = "inline";
+                grayBg.style.display = "inline";
+
+                blackTxt.style.display = "inline";
+                whiteTxt.style.display = "inline";
+                redTxt.style.display = "inline";
+                orangeTxt.style.display = "inline";
+                yellowTxt.style.display = "inline";
+                greenTxt.style.display = "inline";
+                blueTxt.style.display = "inline";
+                purpleTxt.style.display = "inline";
+                pinkTxt.style.display = "inline";
+                grayTxt.style.display = "inline";
+            }
+
+            themes.forEach((btn) => {
+                btn.addEventListener('click', themeChange);
+            })
+
+            function themeChange(event) {
+                switch(event.target.value) {
+                    case 'dark': 
+                    root.style.setProperty('--bg-color', 'black');
+                    root.style.setProperty('--bg-text', 'white');
+                        break
+                    case 'murky':
+                        root.style.setProperty('--bg-color', 'rgb(60, 86, 134)');
+                        root.style.setProperty('--bg-text', 'white');
+                        break
+                    case 'light':
+                        root.style.setProperty('--bg-color', 'white');
+                        root.style.setProperty('--bg-text', 'black');
+                    break
+                    case 'back':
+                    document.getElementById("dark").style.display = "inline";
+                    document.getElementById("murky").style.display = "inline";
+                    document.getElementById("light").style.display = "inline";
+                    document.getElementById("custom").style.display = "inline";
+                    
+                    backButton.style.display = "none";
+
+                    bgH3.style.display = "none";
+                    txtH3.style.display = "none";
+
+                    blackBg.style.display = "none";
+                    whiteBg.style.display = "none";
+                    redBg.style.display = "none";
+                    orangeBg.style.display = "none";
+                    yellowBg.style.display = "none";
+                    greenBg.style.display = "none";
+                    blueBg.style.display = "none";
+                    purpleBg.style.display = "none";
+                    pinkBg.style.display = "none";
+                    grayBg.style.display = "none";
+
+                    blackTxt.style.display = "none";
+                    whiteTxt.style.display = "none";
+                    redTxt.style.display = "none";
+                    orangeTxt.style.display = "none";
+                    yellowTxt.style.display = "none";
+                    greenTxt.style.display = "none";
+                    blueTxt.style.display = "none";
+                    purpleTxt.style.display = "none";
+                    pinkTxt.style.display = "none";
+                    grayTxt.style.display = "none";
+                        break
+                    case 'black-bg':
+                        root.style.setProperty('--bg-color', 'black');
+                        break
+                    case 'white-bg':
+                        root.style.setProperty('--bg-color', 'white');
+                        break
+                    case 'red-bg':
+                        root.style.setProperty('--bg-color', '#e74c3c');
+                        break
+                    case 'orange-bg':
+                        root.style.setProperty('--bg-color', '#eb984e');
+                        break
+                    case 'yellow-bg':
+                        root.style.setProperty('--bg-color', '#f7dc6f');
+                        break
+                    case 'green-bg':
+                        root.style.setProperty('--bg-color', '#52be80');
+                        break
+                    case 'blue-bg':
+                        root.style.setProperty('--bg-color', '#5dade2');
+                        break
+                    case 'purple-bg':
+                        root.style.setProperty('--bg-color', '#d7bde2');
+                        break
+                    case 'pink-bg':
+                        root.style.setProperty('--bg-color', '#fadbd8');
+                        break
+                    case 'gray-bg':
+                        root.style.setProperty('--bg-color', '#d5dbdb');
+                        break
+                    case 'black-txt':
+                        root.style.setProperty('--bg-text', 'black');
+                        break
+                    case 'white-txt':
+                        root.style.setProperty('--bg-text', 'white');
+                        break
+                    case 'red-txt':
+                        root.style.setProperty('--bg-text', '#b03a2e');
+                        break
+                    case 'orange-txt':
+                        root.style.setProperty('--bg-text', '#e67e22');
+                        break
+                    case 'yellow-txt':
+                        root.style.setProperty('--bg-text', '#f1c40f');
+                        break
+                    case 'green-txt':
+                        root.style.setProperty('--bg-text', '#196f3d');
+                        break
+                    case 'blue-txt':
+                        root.style.setProperty('--bg-text', '#154360');
+                        break
+                    case 'purple-txt':
+                        root.style.setProperty('--bg-text', '#4a235a');
+                        break
+                    case 'pink-txt':
+                        root.style.setProperty('--bg-text', '#cd005d');
+                        break
+                    case 'gray-txt':
+                        root.style.setProperty('--bg-text', '#4d4d4d');
+                }
+            }
+
+        </script>
+    </body>
+</html>
