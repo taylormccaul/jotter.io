@@ -41,35 +41,18 @@
                 padding: 1em;
             }
 
-            #demo-note > textarea {
+            #demo-note > .textarea {
                 width: 95.2vw;
                 max-width: 95.2vw;
                 height: 80vh;
                 font-family: 'Montserrat', Helvetica, sans-serif;
-                font-size: 18px;
+                font-size: 17px;
                 color: var(--bg-text);
                 background-color: var(--bg-color);
                 border: 1px solid var(--bg-color);
                 scrollbar-width: thin;
+                margin-top: -0.5em;
             }
-
-            /*.bg-txt-h3s {
-                display: none;
-                font-family: 'Righteous', Helvetica, sans-serif;
-                text-align: center;
-            }*/
-
-            /*#bg-color-h3 {
-                display: none;
-                font-family: 'Righteous', Helvetica, sans-serif;
-                text-align: center;
-            }
-
-            #txt-color-h3 {
-                display: none;
-                font-family: 'Righteous', Helvetica, sans-serif;
-                text-align: center;
-            }*/
 
             #back { display: none; }
 
@@ -212,30 +195,28 @@
             }
 
             #dark {
-                margin-left: 27em;
+                margin-left: 24.5em;
             }
 
             #notes {
                 margin-top: -4.2em;
                 margin-left: 85vw;
             }
+
+            #save {
+                display: block;
+                position: static;
+            }
         </style>
     </head>
     <body>
         <div class="flex-container">
-        <h1 id="h1">Jotter.io<!--CSS Note-taking Tool w/ Themes--></h1>
+        <h1 id="h1">Jotter.io</h1>
         <div class="theme-div">
         <button value="dark" id="dark" class="btn btn-light btn-md">dark</button>
         <button value="murky" id="murky" class="btn btn-light btn-md">murky</button>
         <button value="light" id="light" class="btn btn-light btn-md">light</button>
         <button value="custom" id="custom" onclick="customThemeLoad()" class="btn btn-light btn-md">custom</button>
-        <div class="dropdown">
-            <button class="btn btn-light btn-md dropdown-toggle"id="notes" data-toggle="dropdown">Notes
-            <span class="caret"></span></button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#" id="no-notes">No notes here!</a>
-            </div>
-        </div>
         <button value="back" id="back" onclick="goBack()" class="btn btn-light btn-md">back</button>
          
         <h3 id="bg-color-h3" class="bg-text-h3s">Background color:</h3>
@@ -265,18 +246,26 @@
         <button value="gray-txt" id="gray-txt" class="bg-text-colors btn btn-light">gray</button>
         </div>
 
+        <div class="dropdown">
+            <button class="btn btn-light btn-md dropdown-toggle" id="notes" data-toggle="dropdown">notes
+            <span class="caret"></span></button>
+            <div class="dropdown-menu" id="dropdown-menu">
+                <a class="dropdown-item" href="#" id="no-notes" onclick="copyValues()">No notes here!</a>
+            </div>
+        </div>
+
         <section id="demo-note">
-            <textarea>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
-            <button type="button" class="btn btn-light btn-block" onclick="saveNote()">Save Note</button>
+            <textarea id="demo-text" class="textarea">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+            <button id="save" class="btn btn-light btn-block">copy note to clipboard</button>
         </section>
     </div>
-        <!--<div id="border-box"></div>-->
         <script>
-            //ability to add themes, save themes, create custom themes, add notes, save notes, etc.
             const root = document.documentElement;
             const themes = document.querySelectorAll('.theme-div > button');
+            const demos = document.querySelectorAll('#demo-note > button');
+            const dropdowns = document.querySelectorAll('#dropdown-menu > a');
             
-            var backButton = document.getElementById("back");
+            const backButton = document.getElementById("back");
 
             var demoNote = document.getElementById("demo-note");
             var h1 = document.getElementById("h1");
@@ -305,17 +294,13 @@
             var pinkTxt = document.getElementById("pink-txt");
             var grayTxt = document.getElementById("gray-txt");
 
-            //var bgColor = prompt("Choose a background color.");
-            //var bgText = prompt("Choose a text color.");
-
             function customThemeLoad() {
                 document.getElementById("dark").style.display = "none";
                 document.getElementById("murky").style.display = "none";
                 document.getElementById("light").style.display = "none";
                 document.getElementById("custom").style.display = "none";
                 document.getElementById("notes").style.display = "none";
-                //root.style.setProperty('--bg-color', bgColor);
-                //root.style.setProperty('--bg-text', bgText);
+                document.getElementById("save").style.display = "none";
                 backButton.style.display = "block";
                 backButton.style.marginTop = "-3em";
 
@@ -350,47 +335,56 @@
 
             function goBack() {
                 document.getElementById("dark").style.display = "inline";
-                    document.getElementById("murky").style.display = "inline";
-                    document.getElementById("light").style.display = "inline";
-                    document.getElementById("custom").style.display = "inline";
-                    document.getElementById("notes").style.display = "inline";
-                    
-                    backButton.style.display = "none";
+                document.getElementById("murky").style.display = "inline";
+                document.getElementById("light").style.display = "inline";
+                document.getElementById("custom").style.display = "inline";
+                document.getElementById("notes").style.display = "inline";
+                document.getElementById("save").style.display = "Inline";
+                
+                backButton.style.display = "none";
 
-                    bgH3.style.display = "none";
-                    txtH3.style.display = "none";
+                bgH3.style.display = "none";
+                txtH3.style.display = "none";
 
-                    demoNote.style.display = "block";
-                    h1.style.display = "block";
+                demoNote.style.display = "block";
+                h1.style.display = "block";
 
-                    blackBg.style.display = "none";
-                    whiteBg.style.display = "none";
-                    redBg.style.display = "none";
-                    orangeBg.style.display = "none";
-                    yellowBg.style.display = "none";
-                    greenBg.style.display = "none";
-                    blueBg.style.display = "none";
-                    purpleBg.style.display = "none";
-                    pinkBg.style.display = "none";
-                    grayBg.style.display = "none";
+                blackBg.style.display = "none";
+                whiteBg.style.display = "none";
+                redBg.style.display = "none";
+                orangeBg.style.display = "none";
+                yellowBg.style.display = "none";
+                greenBg.style.display = "none";
+                blueBg.style.display = "none";
+                purpleBg.style.display = "none";
+                pinkBg.style.display = "none";
+                grayBg.style.display = "none";
 
-                    blackTxt.style.display = "none";
-                    whiteTxt.style.display = "none";
-                    redTxt.style.display = "none";
-                    orangeTxt.style.display = "none";
-                    yellowTxt.style.display = "none";
-                    greenTxt.style.display = "none";
-                    blueTxt.style.display = "none";
-                    purpleTxt.style.display = "none";
-                    pinkTxt.style.display = "none";
-                    grayTxt.style.display = "none";
+                blackTxt.style.display = "none";
+                whiteTxt.style.display = "none";
+                redTxt.style.display = "none";
+                orangeTxt.style.display = "none";
+                yellowTxt.style.display = "none";
+                greenTxt.style.display = "none";
+                blueTxt.style.display = "none";
+                purpleTxt.style.display = "none";
+                pinkTxt.style.display = "none";
+                grayTxt.style.display = "none";
             }
 
             themes.forEach((btn) => {
-                btn.addEventListener('click', themeChange);
+                btn.addEventListener('click', changeTheme);
             })
 
-            function themeChange(event) {
+            demos.forEach((btn) => {
+                btn.addEventListener('click', copyNote);
+            })
+
+            dropdowns.forEach((a) => {
+                a.addEventListener('click', copyValues);
+            })
+
+            function changeTheme(event) {
                 switch(event.target.value) {
                     case 'dark': 
                     root.style.setProperty('--bg-color', 'black');
@@ -466,7 +460,93 @@
                 }
             }
 
-            function saveNote() {
+            var i = 0;
+
+    function copyNote() {
+        var copiedText = document.getElementById("demo-text");
+
+        copiedText.select();
+        copiedText.setSelectionRange(0, 99999);
+
+        document.execCommand("copy");
+        /*document.getElementById("no-notes").style.display = "none";
+
+        var newNote = document.createElement('a');
+        i++;
+        newNote.innerHTML = `Note ${i}`;
+        document.getElementById("dropdown-menu").appendChild(newNote);
+        newNote.classList.add("dropdown-item");
+        newNote.style.cursor = "pointer";
+
+        var noteArea = document.getElementsByClassName("dropdown-item")
+
+        var demoTextArea = document.getElementById("demo-text").value;
+        var demoSave = demoTextArea;
+        demoTextArea.value = "";*/
+
+    /*var demoTextArea = document.getElementById("demo-text");
+    demoTextArea.value 
+    demoTextArea.value = "";*/
+    /*var newText = document.createElement('textarea');
+    newText.innerHTML = "In my younger and more vulnerable years, my father gave me some advice that I've been turning over in my mind ever since.";
+    document.getElementById("demo-note").appendChild(newText);
+    newText.classList.add("textarea");
+    //demoTextArea.style.display = "none";
+    //newText.innerHTML = "Saved note!";*/
+        alert("Copied note!");
+    }
+
+            function copyValues() {
+                demoTextArea = document.getElementById("demo-text").value;
+                var noteValue = localStorage.setItem("note", demoSave);
+                document.getElementById("demo-text").value = localStorage.getItem("note");
+                //const noteValue = document.getElementsByTagName("A").value + document.getElementById("demo-text").value;
+                //var demoTextArea = document.getElementById("demo-text");
+                //noteValue = document.getElementById("demo-text").value;
+                //document.getElementById("demo-text").value = "";
+
+                /*document.getElementById("dark").style.display = "inline";
+                document.getElementById("murky").style.display = "inline";
+                document.getElementById("light").style.display = "inline";
+                document.getElementById("custom").style.display = "inline";
+                document.getElementById("notes").style.display = "inline";
+                document.getElementById("save").style.display = "Inline";
+                
+                backButton.style.display = "none";
+
+                bgH3.style.display = "none";
+                txtH3.style.display = "none";
+
+                demoNote.style.display = "block";
+                h1.style.display = "block";
+
+                blackBg.style.display = "none";
+                whiteBg.style.display = "none";
+                redBg.style.display = "none";
+                orangeBg.style.display = "none";
+                yellowBg.style.display = "none";
+                greenBg.style.display = "none";
+                blueBg.style.display = "none";
+                purpleBg.style.display = "none";
+                pinkBg.style.display = "none";
+                grayBg.style.display = "none";
+
+                blackTxt.style.display = "none";
+                whiteTxt.style.display = "none";
+                redTxt.style.display = "none";
+                orangeTxt.style.display = "none";
+                yellowTxt.style.display = "none";
+                greenTxt.style.display = "none";
+                blueTxt.style.display = "none";
+                purpleTxt.style.display = "none";
+                pinkTxt.style.display = "none";
+                grayTxt.style.display = "none";
+
+
+                var noteValue = document.getElementsByTagName("A").value;
+                //var noteId = document.getElementsByTagName("A")[i].setAttribute("id", `note${i}`);
+                //var noteValue = document.getElementById(`note${i}`).value;
+                noteValue = demoTextArea.value;*/
 
             }
 
