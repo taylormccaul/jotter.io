@@ -1,0 +1,222 @@
+body {
+    background-color: var(--bg-color, white);
+    color: var(--bg-text, black);
+    margin: 0;
+    padding: 10px;
+}
+
+#h1 {
+    font-family: 'Chelsea Market', Arial, sans-serif;
+    font-size: 40px;
+    text-align: center;
+}
+
+#h2 {
+    display: none;
+    text-align: center;
+    font-family: 'Chelsea Market', Helvetica, sans-serif;
+    margin-top: 1em;
+}
+
+.flex-container {
+    display: flex;
+    flex-flow: column nowrap;
+    -ms-flex-flow: column nowrap;
+    justify-content: center;
+}
+
+.theme-div {
+    background-color: none;
+    min-height: 6vh;
+}
+
+#demo-note {
+    height: 94vh;
+    padding: 1em;
+    text-align: center;
+}
+
+#demo-note > .textarea {
+    width: 95.2vw;
+    max-width: 95.2vw;
+    height: 70vh;
+    max-height: 90vh;
+    font-family: 'Montserrat', Helvetica, sans-serif;
+    font-size: 17px;
+    color: var(--bg-text);
+    background-color: var(--bg-color);
+    border: none;
+    scrollbar-width: thin;
+    margin-top: -0.5em;
+}
+
+#back { display: none; }
+
+.bg-colors { 
+    display: none;
+    padding: 10px 15px;
+    width: 7vw;
+}
+
+#bg-color-h3 { 
+    display: none;
+    font-family: 'Chelsea Market', Helvetica, sans-serif;
+    text-align: center;
+    font-size: 2em;
+    margin-top: 1.5em;
+}
+
+#txt-color-h3 { 
+    display: none;
+    font-family: 'Chelsea Market', Helvetica, sans-serif;
+    text-align: center;
+    font-size: 2em;
+    margin-top: 1.5em;
+}
+
+#black-bg { 
+    background-color: black;
+    color: black;
+}
+
+#white-bg {
+    background-color: white;
+    color: white;
+}
+
+#red-bg { 
+    background-color: #e74c3c;
+    color: #e74c3c;
+}
+
+#orange-bg {
+    background-color: #eb984e;
+    color: #eb984e;
+}
+
+#yellow-bg {
+    background-color: #f7dc6f;
+    color: #f7dc6f;
+}
+
+#green-bg {
+    background-color: #52be80;
+    color: #52be80;
+}
+
+#blue-bg {
+    background-color: #5dade2;
+    color: #5dade2;
+}
+
+#purple-bg {
+    background-color: #d7bde2;
+    color: #d7bde2;
+}
+
+#pink-bg {
+    background-color: #fadbd8;
+    color: #fadbd8;
+}
+
+#gray-bg {
+    background-color: #d5dbdb;
+    color: #d5dbdb;
+}
+
+.bg-text-colors {
+    display: none;
+    padding: 10px 15px;
+    width: 7vw;
+}
+
+.btn {
+    width: 8em;
+    color: black;
+    font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
+.btn-block {
+    width: 95.2vw;
+}
+
+#black-txt { 
+    background-color: black;
+    color: black;
+}
+
+#white-txt {
+    background-color: white;
+    color: white;
+}
+
+#red-txt { 
+    background-color: #b03a2e;
+    color: #b03a2e;
+}
+
+#orange-txt {
+    background-color: #e67e22;
+    color: #e67e22;
+}
+
+#yellow-txt {
+    background-color: #f1c40f;
+    color: #f1c40f;
+}
+
+#green-txt {
+    background-color: #196f3d;
+    color: #196f3d;
+}
+
+#blue-txt {
+    background-color: #154360;
+    color: #154360;
+}
+
+#purple-txt {
+    background-color: #4a235a;
+    color: #4a235a;
+}
+
+#pink-txt {
+    background-color: #cd005d;
+    color: #cd005d;
+}
+
+#gray-txt {
+    background-color: #4d4d4d;
+    color: #4d4d4d;
+}
+
+#dark {
+    margin-left: 25em;
+}
+
+#notes {
+    margin-top: -4.2em;
+    margin-left: 85vw;
+}
+
+#save {
+    display: block;
+    position: static;
+}
+
+.note-text {
+    background-color: #f8f9f9;
+    border-radius: 5px;
+    color: black !important;
+    padding: 10px;
+    min-width: 22.2vw;
+    min-height: 30vh;
+    margin: 10px;
+    float: left;
+}
+
+.note-text:hover {
+    background-color: #eaeded;
+    border: 1px solid #d5dbdb;
+    font-size: 1.2em;
+}

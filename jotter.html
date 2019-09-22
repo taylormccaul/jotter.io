@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<!--Started project 9/19/19-->
+<html>
+    <head>
+        <title>CSS Border Preview Tool</title>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+        <link rel='stylesheet' href='jotter.css' type='text/css'>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js'></script>
+        <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+        <!--<script src='./jotter.js' type='text/js'></script>-->
+        <link href='https://fonts.googleapis.com/css?family=Chelsea+Market|Montserrat|Cute+Font|Megrim|Monoton|Righteous|UnifrakturMaguntia&display=swap' rel='stylesheet'>
+    </head>
+    <body>
+        <div class='flex-container'>
+        <h1 id='h1'>Jotter.io</h1>
+        <div class='theme-div'>
+        <button value='dark' id='dark' class='btn btn-light btn-md'>dark</button>
+        <button value='murky' id='murky' class='btn btn-light btn-md'>murky</button>
+        <button value='light' id='light' class='btn btn-light btn-md'>light</button>
+        <button value='custom' id='custom' onclick='customThemeLoad()' class='btn btn-light btn-md'>custom</button>
+        <button value='back' id='back' onclick='goBack()' class='btn btn-light btn-md'>back</button>
+        <!--<hr id='hr'> Tried to append textarea to hr to fix duplicate textarea issue.-->
+         
+        <h3 id='bg-color-h3' class='bg-text-h3s'>Background color:</h3>
+        <button value='black-bg' id='black-bg' class='bg-colors btn'>black</button>
+        <button value='white-bg' id='white-bg' class='bg-colors btn btn-light'>white</button>
+        <button value='red-bg' id='red-bg' class='bg-colors btn btn-light'>red</button>
+        <button value='orange-bg' id='orange-bg' class='bg-colors btn btn-light'>orange</button>
+        <button value='yellow-bg' id='yellow-bg' class='bg-colors btn btn-light'>yellow</button>
+        <button value='green-bg' id='green-bg' class='bg-colors btn btn-light'>green</button>
+        <button value='blue-bg' id='blue-bg' class='bg-colors btn btn-light'>blue</button>
+        <button value='purple-bg' id='purple-bg' class='bg-colors btn btn-light'>purple</button>
+        <button value='pink-bg' id='pink-bg' class='bg-colors btn btn-light'>pink</button>
+        <button value='gray-bg' id='gray-bg' class='bg-colors btn btn-light'>gray</button>
+        
+        <br>
+
+        <h3 id='txt-color-h3' class='bg-text-h3s'>Text color:</h3>
+        <button value='black-txt' id='black-txt' class='bg-text-colors btn btn-light'>black</button>
+        <button value='white-txt' id='white-txt' class='bg-text-colors btn btn-light'>white</button>
+        <button value='red-txt' id='red-txt' class='bg-text-colors btn btn-light'>red</button>
+        <button value='orange-txt' id='orange-txt' class='bg-text-colors btn btn-light'>orange</button>
+        <button value='yellow-txt' id='yellow-txt' class='bg-text-colors btn btn-light'>yellow</button>
+        <button value='green-txt' id='green-txt' class='bg-text-colors btn btn-light'>green</button>
+        <button value='blue-txt' id='blue-txt' class='bg-text-colors btn btn-light'>blue</button>
+        <button value='purple-txt' id='purple-txt' class='bg-text-colors btn btn-light'>purple</button>
+        <button value='pink-txt' id='pink-txt' class='bg-text-colors btn btn-light'>pink</button>
+        <button value='gray-txt' id='gray-txt' class='bg-text-colors btn btn-light'>gray</button>
+        </div>
+
+        <div class='dropdown'>
+            <button class='btn btn-light btn-md dropdown-toggle' id='notes' data-toggle='dropdown'>export
+            <span class='caret'></span></button>
+            <div class='dropdown-menu' id='dropdown-menu'>
+                <a class='dropdown-item' href='#' id='no-notes' onclick='copyNote()'>copy</a>
+            </div>
+        </div>
+
+        <section id='demo-note'>
+            <textarea id='demo-text' class='textarea' cols='40' rows='6' maxlength='300'></textarea>
+            <button id='save' class='btn btn-light btn-block' onclick='saveNote()'>save note</button>
+            <div id="append-div"></div>
+            <div id='notes-div'></div>
+            <h2 id='h2'>Notes</h2>
+        </section>
+    </div>
+    <script>
+            const root = document.documentElement;
+            const themes = document.querySelectorAll('.theme-div > button');
+            const demos = document.querySelectorAll('#demo-note > button');
+            const dropdowns = document.querySelectorAll('#dropdown-menu > a');
+            
+            const backButton = document.getElementById('back');
+            const notes = document.querySelector('#notes-div');
+
+            var demoNote = document.getElementById('demo-note');
+            var h1 = document.getElementById('h1');
+
+            document.getElementById('demo-text').focus();
+            /*var notes = [];*/
+            
+            var blackBg = document.getElementById('black-bg');
+            var whiteBg = document.getElementById('white-bg');
+            var redBg = document.getElementById('red-bg');
+            var orangeBg = document.getElementById('orange-bg');
+            var yellowBg = document.getElementById('yellow-bg');
+            var greenBg = document.getElementById('green-bg');
+            var blueBg = document.getElementById('blue-bg');
+            var purpleBg = document.getElementById('purple-bg');
+            var pinkBg = document.getElementById('pink-bg');
+            var grayBg = document.getElementById('gray-bg');
+            var bgH3 = document.getElementById('bg-color-h3');
+            var txtH3 = document.getElementById('txt-color-h3');
+
+            var blackTxt = document.getElementById('black-txt');
+            var whiteTxt = document.getElementById('white-txt');
+            var redTxt = document.getElementById('red-txt');
+            var orangeTxt = document.getElementById('orange-txt');
+            var yellowTxt = document.getElementById('yellow-txt');
+            var greenTxt = document.getElementById('green-txt');
+            var blueTxt = document.getElementById('blue-txt');
+            var purpleTxt = document.getElementById('purple-txt');
+            var pinkTxt = document.getElementById('pink-txt');
+            var grayTxt = document.getElementById('gray-txt');
+
+            function customThemeLoad() {
+                document.getElementById('dark').style.display = 'none';
+                document.getElementById('murky').style.display = 'none';
+                document.getElementById('light').style.display = 'none';
+                document.getElementById('custom').style.display = 'none';
+                document.getElementById('notes').style.display = 'none';
+                document.getElementById('save').style.display = 'none';
+                backButton.style.display = 'block';
+                backButton.style.marginTop = '-3em';
+
+                bgH3.style.display = 'block';
+                txtH3.style.display = 'block';
+
+                demoNote.style.display = 'none';
+                h1.style.display = 'inline';
+
+                blackBg.style.display = 'inline';
+                whiteBg.style.display = 'inline';
+                redBg.style.display = 'inline';
+                orangeBg.style.display = 'inline';
+                yellowBg.style.display = 'inline';
+                greenBg.style.display = 'inline';
+                blueBg.style.display = 'inline';
+                purpleBg.style.display = 'inline';
+                pinkBg.style.display = 'inline';
+                grayBg.style.display = 'inline';
+
+                blackTxt.style.display = 'inline';
+                whiteTxt.style.display = 'inline';
+                redTxt.style.display = 'inline';
+                orangeTxt.style.display = 'inline';
+                yellowTxt.style.display = 'inline';
+                greenTxt.style.display = 'inline';
+                blueTxt.style.display = 'inline';
+                purpleTxt.style.display = 'inline';
+                pinkTxt.style.display = 'inline';
+                grayTxt.style.display = 'inline';
+            }
+
+            function goBack() {
+                document.getElementById('dark').style.display = 'inline';
+                document.getElementById('murky').style.display = 'inline';
+                document.getElementById('light').style.display = 'inline';
+                document.getElementById('custom').style.display = 'inline';
+                document.getElementById('notes').style.display = 'inline';
+                document.getElementById('save').style.display = 'Inline';
+                
+                backButton.style.display = 'none';
+
+                bgH3.style.display = 'none';
+                txtH3.style.display = 'none';
+
+                demoNote.style.display = 'block';
+                h1.style.display = 'block';
+
+                blackBg.style.display = 'none';
+                whiteBg.style.display = 'none';
+                redBg.style.display = 'none';
+                orangeBg.style.display = 'none';
+                yellowBg.style.display = 'none';
+                greenBg.style.display = 'none';
+                blueBg.style.display = 'none';
+                purpleBg.style.display = 'none';
+                pinkBg.style.display = 'none';
+                grayBg.style.display = 'none';
+
+                blackTxt.style.display = 'none';
+                whiteTxt.style.display = 'none';
+                redTxt.style.display = 'none';
+                orangeTxt.style.display = 'none';
+                yellowTxt.style.display = 'none';
+                greenTxt.style.display = 'none';
+                blueTxt.style.display = 'none';
+                purpleTxt.style.display = 'none';
+                pinkTxt.style.display = 'none';
+                grayTxt.style.display = 'none';
+            }
+
+            themes.forEach((btn) => {
+                btn.addEventListener('click', changeTheme);
+            })
+
+            demos.forEach((btn) => {
+                btn.addEventListener('click', copyValues);
+            })
+
+            dropdowns.forEach((a) => {
+                a.addEventListener('click', copyValues);
+            })
+
+            function changeTheme(event) {
+                switch(event.target.value) {
+                    case 'dark': 
+                    root.style.setProperty('--bg-color', 'black');
+                    root.style.setProperty('--bg-text', 'white');
+                        break
+                    case 'murky':
+                        root.style.setProperty('--bg-color', 'rgb(60, 86, 134)');
+                        root.style.setProperty('--bg-text', 'white');
+                        break
+                    case 'light':
+                        root.style.setProperty('--bg-color', 'white');
+                        root.style.setProperty('--bg-text', 'black');
+                    break
+                    case 'black-bg':
+                        root.style.setProperty('--bg-color', 'black');
+                        break
+                    case 'white-bg':
+                        root.style.setProperty('--bg-color', 'white');
+                        break
+                    case 'red-bg':
+                        root.style.setProperty('--bg-color', '#e74c3c');
+                        break
+                    case 'orange-bg':
+                        root.style.setProperty('--bg-color', '#eb984e');
+                        break
+                    case 'yellow-bg':
+                        root.style.setProperty('--bg-color', '#f7dc6f');
+                        break
+                    case 'green-bg':
+                        root.style.setProperty('--bg-color', '#52be80');
+                        break
+                    case 'blue-bg':
+                        root.style.setProperty('--bg-color', '#5dade2');
+                        break
+                    case 'purple-bg':
+                        root.style.setProperty('--bg-color', '#d7bde2');
+                        break
+                    case 'pink-bg':
+                        root.style.setProperty('--bg-color', '#fadbd8');
+                        break
+                    case 'gray-bg':
+                        root.style.setProperty('--bg-color', '#d5dbdb');
+                        break
+                    case 'black-txt':
+                        root.style.setProperty('--bg-text', 'black');
+                        break
+                    case 'white-txt':
+                        root.style.setProperty('--bg-text', 'white');
+                        break
+                    case 'red-txt':
+                        root.style.setProperty('--bg-text', '#b03a2e');
+                        break
+                    case 'orange-txt':
+                        root.style.setProperty('--bg-text', '#e67e22');
+                        break
+                    case 'yellow-txt':
+                        root.style.setProperty('--bg-text', '#f1c40f');
+                        break
+                    case 'green-txt':
+                        root.style.setProperty('--bg-text', '#196f3d');
+                        break
+                    case 'blue-txt':
+                        root.style.setProperty('--bg-text', '#154360');
+                        break
+                    case 'purple-txt':
+                        root.style.setProperty('--bg-text', '#4a235a');
+                        break
+                    case 'pink-txt':
+                        root.style.setProperty('--bg-text', '#cd005d');
+                        break
+                    case 'gray-txt':
+                        root.style.setProperty('--bg-text', '#4d4d4d');
+                }
+            }
+
+            var i = 0;
+
+    function copyNote() {
+        var copiedText = document.getElementById('demo-text');
+
+        copiedText.select();
+        copiedText.setSelectionRange(0, 99999);
+
+        document.execCommand('copy');
+        alert('Copied note!');
+    }
+
+    function copyValues() {
+        document.getElementById('h2').style.display = 'block';
+        document.getElementById('append-div').appendChild(document.getElementById('h2'));
+        let demoTextArea = document.getElementById('demo-text');
+        let text = demoTextArea.value;
+        let note = document.createElement('div');
+
+        note.classList.add('note');
+        note.innerHTML = `<div class='note-text'>${text}</div>`;
+
+        notes.appendChild(note);
+
+        if (demoTextArea.value == '') {
+            alert('No text to save!');
+            notes.removeChild(note);
+        }
+
+        demoTextArea.value = '';
+        demoTextArea.focus();
+        
+
+        /*document.getElementById('no-notes').style.display = 'none';
+
+        var newNote = document.createElement('a');
+        i++;
+        newNote.innerHTML = `Note ${i}`;
+        document.getElementById('dropdown-menu').appendChild(newNote);
+        newNote.classList.add('dropdown-item');
+        newNote.style.cursor = 'pointer';*/
+    }
+    </script>
+    </body>
+</html>
