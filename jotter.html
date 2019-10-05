@@ -2,7 +2,7 @@
 <!--Started project 9/19/19-->
 <html>
     <head>
-        <title>CSS Border Preview Tool</title>
+        <title>Notepad App</title>
         <meta charset='utf-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
@@ -64,6 +64,7 @@
             <textarea id='demo-text' class='textarea' cols='40' rows='6' maxlength='300'></textarea>
             <button id='save' class='btn btn-light btn-block' onclick='saveNote()'>save note</button>
             <div id="append-div"></div>
+            <p id='notes-p'>Click on a note to delete</p>
             <div id='notes-div'></div>
             <h2 id='h2'>Notes</h2>
         </section>
@@ -190,11 +191,11 @@
             })
 
             demos.forEach((btn) => {
-                btn.addEventListener('click', copyValues);
+                btn.addEventListener('click', saveValues);
             })
 
             dropdowns.forEach((a) => {
-                a.addEventListener('click', copyValues);
+                a.addEventListener('click', saveValues);
             })
 
             function changeTheme(event) {
@@ -285,17 +286,27 @@
         alert('Copied note!');
     }
 
-    function copyValues() {
+    function saveValues() {
         document.getElementById('h2').style.display = 'block';
+        document.getElementById('notes-p').style.display = 'block';
         document.getElementById('append-div').appendChild(document.getElementById('h2'));
         let demoTextArea = document.getElementById('demo-text');
         let text = demoTextArea.value;
         let note = document.createElement('div');
 
         note.classList.add('note');
+        note.addEventListener('click', () => {
+            note.style.display = "none";
+        });
         note.innerHTML = `<div class='note-text'>${text}</div>`;
+        //let delIcons = document.querySelectorAll('.note-text > i');
 
         notes.appendChild(note);
+
+        /*delIcons.addEventListener('click', () => {
+            notes.removeChild(note);
+            note.style.backgroundColor = "red";
+        });*/
 
         if (demoTextArea.value == '') {
             alert('No text to save!');
@@ -304,7 +315,7 @@
 
         demoTextArea.value = '';
         demoTextArea.focus();
-        
+
 
         /*document.getElementById('no-notes').style.display = 'none';
 
